@@ -1,11 +1,20 @@
 import { useState, useEffect, useReducer, useMemo } from "react";
 import GlobalContext from "./GlobalContext";
 import dayjs from "dayjs";
+import { getUserDocument } from "../lib/firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { firebaseAuth, getEventDocument, createEventDocument } from "../lib/firebase";
+
+async function createEvent(payload) {
+   await createEventDocument(payload);
+}
 
 function savedEventsReducer(state, { type, payload }) {
    switch (type) {
       case "push":
-         return [...state, payload];
+         const newState = [...state, payload];
+         createEvent(payload);
+         return newState;
       case "update":
          return state.map((evt) => (evt.id === payload.id ? payload : evt));
       case "delete":
@@ -34,6 +43,7 @@ export default function ContextWrapper(props) {
    const [savedEvents, dispatchCalEvent] = useReducer(savedEventsReducer, [], initEvents);
    const [showSidebar, setShowSidebar] = useState(true);
    const [showProfileModal, setShowProfileModal] = useState(false);
+   const [authenticatedUser, setAuthenticatedUser] = useState({});
 
    const filteredEvents = useMemo(() => {
       return savedEvents.filter((evt) =>
@@ -43,6 +53,16 @@ export default function ContextWrapper(props) {
             .includes(evt.label)
       );
    }, [savedEvents, labels]);
+
+   // useEffect(() => {
+   //    if (authenticatedUser.uid) {
+   //       getEventDocument(authenticatedUser.uid).then((events) => {
+   //          if (events) {
+   //             dispatchCalEvent({ type: "push", payload: events.event });
+   //          }
+   //       });
+   //    }
+   // }, [authenticatedUser]);
 
    useEffect(() => {
       localStorage.setItem("savedEvents", JSON.stringify(savedEvents));
@@ -99,9 +119,28 @@ export default function ContextWrapper(props) {
             setShowSidebar,
             showProfileModal,
             setShowProfileModal,
+            authenticatedUser,
+            setAuthenticatedUser,
          }}
       >
          {props.children}
       </GlobalContext.Provider>
    );
 }
+
+// const UserContext = createContext();
+
+// export const UserProvider = (props) => {
+//    const [userState, setUserState] = useState(InitialUserState);
+
+//    const SetUser = (userCredential) => {
+//       setUserState({ ...userCredential });
+//    };
+
+//    const ResetUser = () => {
+//       setUserState(InitialUserState);
+//    };
+
+//    const value = { ...userState, SetUser, ResetUser };
+//    return <UserContext.Provider value={value} {...props} />;
+// };

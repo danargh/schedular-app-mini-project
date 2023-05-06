@@ -29,6 +29,9 @@ const GlobalContext = createContext({
 
    showProfileModal: false,
    setShowProfileModal: () => {},
+
+   authenticatedUser: {},
+   setAuthenticatedUser: () => {},
 });
 
 export default GlobalContext;

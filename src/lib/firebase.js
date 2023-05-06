@@ -1,7 +1,9 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp, getApps } from "firebase/app";
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { getFirestore, setDoc, addDoc, doc, getDoc } from "firebase/firestore";
 import { getAnalytics } from "firebase/analytics";
+
 import {
    getAuth,
    signInWithEmailAndPassword,
@@ -20,35 +22,28 @@ const firebaseConfig = {
    storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
    messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
    appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
-   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
 // Initialize Firebase
-// const app = initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 // const analytics = getAnalytics(initFirebase);
 if (!getApps().length) {
    initializeApp(firebaseConfig);
 }
 
+const db = getFirestore(app);
+
 export const firebaseAuth = getAuth();
+export const fireStoreDB = db;
 
-// export const signIn = signInWithEmailAndPassword(auth, email, password)
-//    .then((userCredential) => {
-//       // Signed in
-//       const user = userCredential.user;
-//       // ...
-//    })
-//    .catch((error) => {
-//       const errorCode = error.code;
-//       const errorMessage = error.message;
-//    });
-
+// ** Firebase Auth Functions ** //
 export const signIn = async (email, password) => {
    await signInWithEmailAndPassword(firebaseAuth, email, password);
 };
 
 export const signUp = async (email, password) => {
-   await createUserWithEmailAndPassword(firebaseAuth, email, password);
+   const response = await createUserWithEmailAndPassword(firebaseAuth, email, password);
+   return response;
 };
 
 export const signOutAccount = async () => {
@@ -85,5 +80,61 @@ export const getSignUpErrorMessage = (errorCode) => {
          return "Password should be at least 6 characters.";
       default:
          return "An undefined Error happened.";
+   }
+};
+
+// ** Firebase Firestore Functions ** //
+
+export const getUserDocument = async (uid) => {
+   if (!uid) return null;
+   try {
+      const userDocument = await getDoc(doc(db, "users", uid));
+      return {
+         uid,
+         ...userDocument.data(),
+      };
+   } catch (error) {
+      console.error("Error fetching user", error.message);
+   }
+};
+
+export const createUserDocument = async (user, username) => {
+   if (!user) return;
+   try {
+      await setDoc(doc(db, "users", user.uid), {
+         uid: user.uid,
+         username: username,
+         email: user.email,
+      });
+   } catch (error) {
+      console.log(error.message);
+   }
+};
+
+export const getEventDocument = async (userId) => {
+   if (!userId) return null;
+   try {
+      const eventDocument = await getDoc(doc(db, "events", userId));
+      return {
+         userId,
+         ...eventDocument.data(),
+      };
+   } catch (error) {
+      console.error("Error fetching user", error.message);
+   }
+};
+
+export const createEventDocument = async (event) => {
+   if (!event) return;
+   // const userRef = db.ref(`users/${currentUser.uid}`);
+   console.log(event);
+   try {
+      await addDoc(doc(db, "events"), {
+         title: "woi",
+         // description: event.description,
+         // label: event.label,
+      });
+   } catch (error) {
+      console.log(error.message);
    }
 };

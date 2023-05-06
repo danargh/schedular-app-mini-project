@@ -15,7 +15,6 @@ import MenuIcon from "@mui/icons-material/Menu";
 
 const MainNavigation = () => {
    const { monthIndex, setMonthIndex, showSidebar, setShowSidebar } = useContext(GlobalContext);
-   const router = useRouter();
 
    function handleSidebar() {
       setShowSidebar(!showSidebar);
@@ -37,7 +36,7 @@ const MainNavigation = () => {
             <button className="mx-2 cursor-pointer" onClick={handleSidebar}>
                <MenuIcon />
             </button>
-            <Image src={logo} alt="calendar" className="mr-2 w-12 h-12" />
+            {/* <Image src={logo} alt="calendar" className="mr-2 w-12 h-12" /> */}
             <h1 className="mr-10 text-xl text-gray-500 fond-bold">SchedularApp</h1>
             <button onClick={handleReset} className="border rounded py-2 px-4 mr-5">
                Today

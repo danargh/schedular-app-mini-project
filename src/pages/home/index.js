@@ -4,17 +4,41 @@ import Sidebar from "../../components/ui/Sidebar";
 import Month from "../../components/ui/Month";
 import GlobalContext from "../../context/GlobalContext";
 import EventModal from "../../components/ui/EventModal";
-import CreateEventButton from "@/components/ui/CreateEventButton";
+import CreateEventButton from "../../components/ui/CreateEventButton";
 import Layout from "../../components/layout/Layout";
 import ProfileModal from "../../components/ui/ProfileModal";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useRouter } from "next/router";
+import { firebaseAuth } from "../../lib/firebase";
+import { getUserDocument } from "../../lib/firebase";
 
 function Home() {
    const [currenMonth, setCurrentMonth] = useState(getMonth());
-   const { monthIndex, showEventModal, showSidebar, showProfileModal } = useContext(GlobalContext);
+   const { monthIndex, showEventModal, showSidebar, showProfileModal, setAuthenticatedUser } =
+      useContext(GlobalContext);
+   const [user, loading] = useAuthState(firebaseAuth);
+   const router = useRouter();
 
    useEffect(() => {
       setCurrentMonth(getMonth(monthIndex));
    }, [monthIndex]);
+
+   useEffect(() => {
+      if (user) {
+         getUserDocument(user.uid).then((usr) => {
+            setAuthenticatedUser(usr);
+         });
+      }
+   }, []);
+
+   if (loading) {
+      return <div>Loading</div>;
+   }
+
+   if (!user) {
+      router.push("/");
+      return <div>Loading</div>;
+   }
 
    return (
       <>

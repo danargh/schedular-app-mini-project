@@ -19,8 +19,15 @@ export default function Day({ day, rowIdx }) {
          ? "bg-blue-600 text-white rounded-full w-7"
          : "";
    }
+
    return (
-      <div className="border border-gray-200 flex flex-col">
+      <div
+         className="border border-gray-200 flex flex-col cursor-pointer"
+         onClick={() => {
+            setDaySelected(day);
+            setShowEventModal(true);
+         }}
+      >
          <header
             className={`flex flex-col items-center ${
                monthIndex == day.format("MM").charAt(1) - 1 ? "bg-slate-50" : null
@@ -37,10 +44,6 @@ export default function Day({ day, rowIdx }) {
             className={`flex-1 cursor-pointer ${
                monthIndex == day.format("MM").charAt(1) - 1 ? "bg-slate-50" : null
             }`}
-            onClick={() => {
-               setDaySelected(day);
-               setShowEventModal(true);
-            }}
          >
             {dayEvents.map((evt, idx) => (
                <div
