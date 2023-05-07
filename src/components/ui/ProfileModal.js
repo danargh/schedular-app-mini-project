@@ -9,8 +9,6 @@ export default function ProfileModal() {
    const { setShowProfileModal, authenticatedUser } = useContext(GlobalContext);
    const router = useRouter();
 
-   console.log(authenticatedUser);
-
    const handleLogout = () => {
       signOutAccount();
       router.push("/");

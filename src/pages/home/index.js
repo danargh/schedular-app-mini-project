@@ -10,12 +10,18 @@ import ProfileModal from "../../components/ui/ProfileModal";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useRouter } from "next/router";
 import { firebaseAuth } from "../../lib/firebase";
-import { getUserDocument } from "../../lib/firebase";
+import { getUserDocument, getEventDocument } from "../../lib/firebase";
 
 function Home() {
    const [currenMonth, setCurrentMonth] = useState(getMonth());
-   const { monthIndex, showEventModal, showSidebar, showProfileModal, setAuthenticatedUser } =
-      useContext(GlobalContext);
+   const {
+      monthIndex,
+      showEventModal,
+      showSidebar,
+      showProfileModal,
+      setAuthenticatedUser,
+      dispatchCalEvent,
+   } = useContext(GlobalContext);
    const [user, loading] = useAuthState(firebaseAuth);
    const router = useRouter();
 
@@ -29,7 +35,7 @@ function Home() {
             setAuthenticatedUser(usr);
          });
       }
-   }, []);
+   }, [setAuthenticatedUser, user]);
 
    if (loading) {
       return <div>Loading</div>;

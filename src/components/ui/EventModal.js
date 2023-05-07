@@ -17,7 +17,7 @@ import { Timestamp } from "firebase/firestore";
 const labelsClasses = ["indigo", "gray", "green", "blue", "red", "purple"];
 
 export default function EventModal() {
-   const { setShowEventModal, daySelected, dispatchCalEvent, selectedEvent } =
+   const { setShowEventModal, daySelected, dispatchCalEvent, selectedEvent, authenticatedUser } =
       useContext(GlobalContext);
 
    const [title, setTitle] = useState(selectedEvent ? selectedEvent.title : "");
@@ -40,6 +40,7 @@ export default function EventModal() {
          date: Timestamp.fromDate(new Date(`${year}-${month}-${day} ${hour}:${minute}:00`)),
          day: daySelected.valueOf(),
          id: selectedEvent ? selectedEvent.id : Date.now(),
+         userRef: authenticatedUser.uid,
       };
       if (selectedEvent) {
          dispatchCalEvent({ type: "update", payload: calendarEvent });

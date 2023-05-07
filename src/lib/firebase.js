@@ -1,7 +1,18 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp, getApps } from "firebase/app";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { getFirestore, setDoc, addDoc, doc, getDoc } from "firebase/firestore";
+import {
+   getFirestore,
+   setDoc,
+   addDoc,
+   doc,
+   getDoc,
+   collection,
+   where,
+   getDocs,
+   query,
+   deleteDoc,
+} from "firebase/firestore";
 import { getAnalytics } from "firebase/analytics";
 
 import {
@@ -114,11 +125,13 @@ export const createUserDocument = async (user, username) => {
 export const getEventDocument = async (userId) => {
    if (!userId) return null;
    try {
-      const eventDocument = await getDoc(doc(db, "events", userId));
-      return {
-         userId,
-         ...eventDocument.data(),
-      };
+      const q = query(collection(db, "events"), where("userRef", "==", userId));
+
+      const querySnapshot = await getDocs(q);
+      const data = querySnapshot.docs.map((doc) => {
+         return { ...doc.data(), uid: doc.id };
+      });
+      return data;
    } catch (error) {
       console.error("Error fetching user", error.message);
    }
@@ -126,14 +139,45 @@ export const getEventDocument = async (userId) => {
 
 export const createEventDocument = async (event) => {
    if (!event) return;
-   // const userRef = db.ref(`users/${currentUser.uid}`);
-   console.log(event);
    try {
-      await addDoc(doc(db, "events"), {
-         title: "woi",
-         // description: event.description,
-         // label: event.label,
+      console.log("ini push");
+      await addDoc(collection(db, "events"), {
+         id: event.id,
+         title: event.title,
+         description: event.description,
+         times: event.times,
+         day: event.day,
+         label: event.label,
+         date: event.date,
+         userRef: event.userRef,
       });
+   } catch (error) {
+      console.log(error.message);
+   }
+};
+
+export const updateEventDocument = async (event) => {
+   if (!event) return;
+   try {
+      await setDoc(doc(db, "events", event.id), {
+         id: event.id,
+         title: event.title,
+         description: event.description,
+         times: event.times,
+         day: event.day,
+         label: event.label,
+         date: event.date,
+         userRef: event.userRef,
+      });
+   } catch (error) {
+      console.log(error.message);
+   }
+};
+
+export const deleteEventDocument = async (eventUid) => {
+   if (!eventUid) return;
+   try {
+      await deleteDoc(doc(db, "events", eventUid));
    } catch (error) {
       console.log(error.message);
    }
