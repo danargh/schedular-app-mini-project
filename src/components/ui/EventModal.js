@@ -27,6 +27,8 @@ export default function EventModal() {
       selectedEvent ? labelsClasses.find((lbl) => lbl === selectedEvent.label) : labelsClasses[0]
    );
 
+   console.log(selectedEvent);
+
    function handleSubmit(e) {
       e.preventDefault();
       const [day, month, year] = dayjs(daySelected).format("DD-MMMM-YY").split("-");
@@ -40,6 +42,7 @@ export default function EventModal() {
          date: Timestamp.fromDate(new Date(`${year}-${month}-${day} ${hour}:${minute}:00`)),
          day: daySelected.valueOf(),
          id: selectedEvent ? selectedEvent.id : Date.now(),
+         uid: selectedEvent ? selectedEvent.uid : null,
          userRef: authenticatedUser.uid,
       };
       if (selectedEvent) {

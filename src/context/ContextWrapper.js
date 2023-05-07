@@ -4,10 +4,10 @@ import dayjs from "dayjs";
 import { getUserDocument } from "../lib/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import {
-   firebaseAuth,
    getEventDocument,
    createEventDocument,
    deleteEventDocument,
+   updateEventDocument,
 } from "../lib/firebase";
 
 function savedEventsReducer(state, { type, payload }) {
@@ -18,6 +18,7 @@ function savedEventsReducer(state, { type, payload }) {
          createEventDocument(payload);
          return [...state, payload];
       case "update":
+         updateEventDocument(payload);
          return state.map((evt) => (evt.id === payload.id ? payload : evt));
       case "delete":
          deleteEventDocument(payload.uid);
@@ -55,7 +56,7 @@ export default function ContextWrapper(props) {
             console.log("events", events);
          });
       }
-   }, [authenticatedUser]);
+   }, [authenticatedUser, showEventModal, selectedEvent]);
 
    // useEffect(() => {
    //    localStorage.setItem("savedEvents", JSON.stringify(savedEvents));

@@ -12,6 +12,7 @@ import {
    getDocs,
    query,
    deleteDoc,
+   updateDoc,
 } from "firebase/firestore";
 import { getAnalytics } from "firebase/analytics";
 
@@ -21,11 +22,7 @@ import {
    createUserWithEmailAndPassword,
    signOut,
 } from "firebase/auth";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
    apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
    authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
@@ -139,10 +136,12 @@ export const getEventDocument = async (userId) => {
 
 export const createEventDocument = async (event) => {
    if (!event) return;
+   console.log(event);
    try {
       console.log("ini push");
       await addDoc(collection(db, "events"), {
          id: event.id,
+         uid: event.uid,
          title: event.title,
          description: event.description,
          times: event.times,
@@ -159,7 +158,7 @@ export const createEventDocument = async (event) => {
 export const updateEventDocument = async (event) => {
    if (!event) return;
    try {
-      await setDoc(doc(db, "events", event.id), {
+      await updateDoc(doc(db, "events", event.uid), {
          id: event.id,
          title: event.title,
          description: event.description,
@@ -175,6 +174,7 @@ export const updateEventDocument = async (event) => {
 };
 
 export const deleteEventDocument = async (eventUid) => {
+   console.log("ini delete");
    if (!eventUid) return;
    try {
       await deleteDoc(doc(db, "events", eventUid));
