@@ -16,32 +16,32 @@ export default function Day({ day, rowIdx }) {
 
    function getCurrentDayClass() {
       return day.format("DD-MM-YY") === dayjs().format("DD-MM-YY")
-         ? "bg-yellow-200 text-black w-8 text-center font-bold rounded-full"
+         ? "bg-green-300 text-black w-8 text-center font-bold rounded-full"
          : "";
    }
 
    return (
       <div
-         className="border border-gray-200 flex flex-col cursor-pointer"
+         className="border border-gray-200 flex flex-col cursor-pointer dark:border-slate-500"
          onClick={() => {
             setDaySelected(day);
             setShowEventModal(true);
          }}
       >
          <header
-            className={`flex flex-col items-center ${
+            className={`flex flex-col items-center dark:bg-slate-700 ${
                monthIndex == day.format("MM").charAt(1) - 1 ? "bg-slate-50" : null
             }`}
          >
             {rowIdx === 0 && (
                <p className="text-sm mt-1 font-bold">{day.format("ddd").toUpperCase()}</p>
             )}
-            <p className={`text-sm p-1 my-1 text-center  ${getCurrentDayClass()}`}>
+            <p className={`text-m font-normal p-1 my-1 text-center  ${getCurrentDayClass()}`}>
                {day.format("DD")}
             </p>
          </header>
          <div
-            className={`flex-1 cursor-pointer ${
+            className={`flex-1 cursor-pointer dark:bg-slate-700 ${
                monthIndex == day.format("MM").charAt(1) - 1 ? "bg-slate-50" : null
             }`}
          >

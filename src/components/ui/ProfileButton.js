@@ -11,7 +11,7 @@ export default function ProfileButton() {
 
    return (
       <>
-         <button onClick={handleShowProfileModal}>
+         <button onClick={handleShowProfileModal} className="dark:text-green-300">
             <PersonIcon fontSize="large" />
          </button>
       </>

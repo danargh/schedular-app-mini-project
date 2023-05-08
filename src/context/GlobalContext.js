@@ -32,6 +32,9 @@ const GlobalContext = createContext({
 
    authenticatedUser: {},
    setAuthenticatedUser: () => {},
+
+   darkMode: false,
+   setDarkMode: () => {},
 });
 
 export default GlobalContext;

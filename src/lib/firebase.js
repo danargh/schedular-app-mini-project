@@ -132,7 +132,6 @@ export const createEventDocument = async (event) => {
       console.log("ini push");
       await addDoc(collection(db, "events"), {
          id: event.id,
-         uid: event.uid,
          title: event.title,
          description: event.description,
          times: event.times,

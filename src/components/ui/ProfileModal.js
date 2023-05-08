@@ -17,12 +17,12 @@ export default function ProfileModal() {
 
    return (
       <>
-         <div className="h-screen w-full fixed left-0 top-0 flex justify-center items-center">
-            <form className="bg-white rounded-lg shadow-2xl w-1/4">
-               <header className="bg-gray-100 px-4 py-2 flex justify-end items-center">
+         <div className="h-screen w-full fixed left-0 top-0 flex justify-center items-center ">
+            <form className="bg-white rounded-lg shadow-2xl w-1/4  dark:bg-slate-600">
+               <header className="bg-green-300 px-4 py-2 flex justify-end items-center rounded-tl-lg rounded-tr-lg">
                   <div>
                      <button onClick={() => setShowProfileModal(false)}>
-                        <span className="material-icons-outlined text-gray-400">
+                        <span className="material-icons-outlined text-black">
                            <CloseIcon />
                         </span>
                      </button>
@@ -41,7 +41,7 @@ export default function ProfileModal() {
                      </div>
                   </div>
                </div>
-               <footer className="flex justify-end border-t p-3 mt-5">
+               <footer className="flex justify-end border-t p-3 mt-5 dark:border-t-green-300">
                   <button
                      className=" bg-red-500 hover:bg-red-600 px-6 py-2 rounded text-white mx-3"
                      onClick={handleLogout}

@@ -1,8 +1,6 @@
 import { useState, useEffect, useReducer, useMemo } from "react";
 import GlobalContext from "./GlobalContext";
 import dayjs from "dayjs";
-import { getUserDocument } from "../lib/firebase";
-import { useAuthState } from "react-firebase-hooks/auth";
 import {
    getEventDocument,
    createEventDocument,
@@ -39,6 +37,7 @@ export default function ContextWrapper(props) {
    const [showSidebar, setShowSidebar] = useState(true);
    const [showProfileModal, setShowProfileModal] = useState(false);
    const [authenticatedUser, setAuthenticatedUser] = useState({});
+   const [darkMode, setDarkMode] = useState("dark");
 
    const filteredEvents = useMemo(() => {
       return savedEvents.filter((evt) =>
@@ -57,10 +56,6 @@ export default function ContextWrapper(props) {
          });
       }
    }, [authenticatedUser, showEventModal, selectedEvent]);
-
-   // useEffect(() => {
-   //    localStorage.setItem("savedEvents", JSON.stringify(savedEvents));
-   // }, [savedEvents]);
 
    useEffect(() => {
       setLabels((prevLabels) => {
@@ -115,6 +110,8 @@ export default function ContextWrapper(props) {
             setShowProfileModal,
             authenticatedUser,
             setAuthenticatedUser,
+            darkMode,
+            setDarkMode,
          }}
       >
          {props.children}

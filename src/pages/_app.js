@@ -1,11 +1,14 @@
 import "../styles/globals.css";
 import ContextWrapper from "../context/ContextWrapper";
+import { ThemeProvider } from "next-themes";
 
 export default function App({ Component, pageProps }) {
    return (
       <>
          <ContextWrapper>
-            <Component {...pageProps} />
+            <ThemeProvider attribute="class">
+               <Component {...pageProps} />
+            </ThemeProvider>
          </ContextWrapper>
       </>
    );

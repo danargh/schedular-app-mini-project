@@ -32,9 +32,9 @@ export default function SmallCalendar() {
       const currDay = day.format(format);
       const slcDay = daySelected && daySelected.format(format);
       if (nowDay === currDay) {
-         return "bg-yellow-200 rounded-full text-black font-bold";
+         return "bg-green-300 rounded-full text-black font-bold";
       } else if (currDay === slcDay) {
-         return "bg-yellow-100 rounded-full text-yellow-500 font-bold";
+         return "bg-green-100 rounded-full text-green-500 font-bold";
       } else {
          return "";
       }
@@ -42,17 +42,17 @@ export default function SmallCalendar() {
    return (
       <div className="mt-9">
          <header className="flex justify-between mb-3 ml-2">
-            <p className="text-black font-semibold">
+            <p className="text-black font-semibold dark:text-green-300">
                {dayjs(new Date(dayjs().year(), currentMonthIdx)).format("MMMM YYYY")}
             </p>
             <div>
                <button onClick={handlePrevMonth}>
-                  <span className="material-icons-outlined cursor-pointer text-gray-600 mx-2">
+                  <span className="material-icons-outlined cursor-pointer text-gray-600 mx-2 dark:text-green-300">
                      <ArrowBackIosIcon fontSize="small" />
                   </span>
                </button>
                <button onClick={handleNextMonth}>
-                  <span className="material-icons-outlined cursor-pointer text-gray-600 mx-2">
+                  <span className="material-icons-outlined cursor-pointer text-gray-600 mx-2 dark:text-green-300">
                      <ArrowForwardIosIcon fontSize="small" />
                   </span>
                </button>
@@ -60,7 +60,7 @@ export default function SmallCalendar() {
          </header>
          <div className="grid grid-cols-7 grid-rows-6">
             {currentMonth[0].map((day, i) => (
-               <span key={i} className="text-sm py-1 text-center font-semibold">
+               <span key={i} className="text-sm py-1 text-center font-semibold dark:text-slate200">
                   {day.format("dd").charAt(0)}
                </span>
             ))}
