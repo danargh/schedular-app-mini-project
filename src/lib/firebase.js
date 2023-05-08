@@ -1,6 +1,5 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp, getApps } from "firebase/app";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import {
    getFirestore,
    setDoc,
@@ -14,8 +13,6 @@ import {
    deleteDoc,
    updateDoc,
 } from "firebase/firestore";
-import { getAnalytics } from "firebase/analytics";
-
 import {
    getAuth,
    signInWithEmailAndPassword,
@@ -34,7 +31,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-// const analytics = getAnalytics(initFirebase);
+
 if (!getApps().length) {
    initializeApp(firebaseConfig);
 }
@@ -56,11 +53,6 @@ export const signUp = async (email, password) => {
 
 export const signOutAccount = async () => {
    await signOut(firebaseAuth);
-};
-
-export const signInGoogle = async () => {
-   const provider = new GoogleAuthProvider();
-   await signInWithPopup(firebaseAuth, provider);
 };
 
 export const getSignInErrorMessage = (errorCode) => {
@@ -92,7 +84,6 @@ export const getSignUpErrorMessage = (errorCode) => {
 };
 
 // ** Firebase Firestore Functions ** //
-
 export const getUserDocument = async (uid) => {
    if (!uid) return null;
    try {

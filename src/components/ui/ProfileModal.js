@@ -3,6 +3,7 @@ import GlobalContext from "../../context/GlobalContext";
 import { signOutAccount } from "../../lib/firebase";
 import { useRouter } from "next/router";
 
+import PersonIcon from "@mui/icons-material/Person";
 import CloseIcon from "@mui/icons-material/Close";
 
 export default function ProfileModal() {
@@ -29,35 +30,23 @@ export default function ProfileModal() {
                </header>
 
                <div className="p-3">
-                  <div className="flex flex-col items-center">
-                     <img
-                        className="inline-block h-16 w-16 rounded-full ring-2 ring-white mx-5 my-5"
-                        src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                        alt="profileImage"
-                     />
-
+                  <div className="flex flex-col items-center gap-3 ml-5">
                      <div className="flex flex-col min-w-full">
-                        <p>Username</p>
+                        <p className="font-bold">Username</p>
                         <p>{authenticatedUser.username}</p>
                      </div>
                      <div className="flex flex-col min-w-full">
-                        <p>Email</p>
+                        <p className="font-bold">Email</p>
                         <p>{authenticatedUser.email}</p>
                      </div>
                   </div>
                </div>
-               <footer className="flex justify-between border-t p-3 mt-5">
+               <footer className="flex justify-end border-t p-3 mt-5">
                   <button
                      className=" bg-red-500 hover:bg-red-600 px-6 py-2 rounded text-white mx-3"
                      onClick={handleLogout}
                   >
                      Logout
-                  </button>
-                  <button
-                     type="submit"
-                     className="bg-blue-500 hover:bg-blue-600 px-6 py-2 rounded text-white mx-3"
-                  >
-                     Save
                   </button>
                </footer>
             </form>

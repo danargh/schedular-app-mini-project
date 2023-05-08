@@ -10,7 +10,8 @@ import ProfileModal from "../../components/ui/ProfileModal";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useRouter } from "next/router";
 import { firebaseAuth } from "../../lib/firebase";
-import { getUserDocument, getEventDocument } from "../../lib/firebase";
+import { getUserDocument } from "../../lib/firebase";
+import Spinner from "../../components/ui/Spinner";
 
 function Home() {
    const [currenMonth, setCurrentMonth] = useState(getMonth());
@@ -38,12 +39,11 @@ function Home() {
    }, [setAuthenticatedUser, user]);
 
    if (loading) {
-      return <div>Loading</div>;
+      return <Spinner />;
    }
 
    if (!user) {
       router.push("/");
-      return <div>Loading</div>;
    }
 
    return (

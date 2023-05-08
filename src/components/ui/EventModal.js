@@ -57,9 +57,9 @@ export default function EventModal() {
    return (
       <div className="h-screen w-full fixed left-0 top-0 flex justify-center items-center">
          <form className="bg-white rounded-lg shadow-2xl w-1/4">
-            <header className="bg-gray-100 px-4 py-2 flex justify-between items-center">
-               <span className="material-icons-outlined text-gray-400">
-                  <DragHandleIcon />
+            <header className="bg-yellow-200 px-4 py-2 flex justify-between items-center rounded-tl-lg rounded-tr-lg">
+               <span className=" text-gray-400">
+                  <DragHandleIcon sx={{ color: "black" }} />
                </span>
                <div>
                   {selectedEvent && (
@@ -71,14 +71,14 @@ export default function EventModal() {
                            });
                            setShowEventModal(false);
                         }}
-                        className="material-icons-outlined text-gray-400 cursor-pointer"
+                        className=" text-gray-400 cursor-pointer px-3"
                      >
-                        <DeleteIcon />
+                        <DeleteIcon fontSize="medium" className=" text-red-500" />
                      </span>
                   )}
                   <button onClick={() => setShowEventModal(false)}>
-                     <span className="material-icons-outlined text-gray-400">
-                        <CloseIcon />
+                     <span className=" text-gray-400">
+                        <CloseIcon sx={{ color: "black" }} />
                      </span>
                   </button>
                </div>
@@ -91,22 +91,27 @@ export default function EventModal() {
                      placeholder="Add title"
                      value={title}
                      required
-                     className="pt-3 border-0 text-gray-600 text-xl font-semibold pb-2 w-full border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-blue-500"
+                     className="pt-3 border-0 text-gray-600 text-xl font-semibold pb-2 w-full border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-yellow-300"
                      onChange={(e) => setTitle(e.target.value)}
                   />
 
                   <div className="flex my-5 items-center">
-                     <span className="material-icons-outlined text-gray-400 mr-3">
+                     <span className=" text-gray-400 mr-3">
                         <CalendarMonthIcon />
                      </span>
                      <p>{daySelected.format("dddd, MMMM DD")}</p>
                   </div>
 
                   <div className="flex my-1 items-center">
-                     <span className="material-icons-outlined text-gray-400 mr-3">
+                     <span className=" text-gray-400 mr-3">
                         <AccessTimeIcon />
                      </span>
-                     <select name="times" value={times} onChange={(e) => setTimes(e.target.value)}>
+                     <select
+                        className="rounded-lg border-2 border-gray-300"
+                        name="times"
+                        value={times}
+                        onChange={(e) => setTimes(e.target.value)}
+                     >
                         {getTimesEveryFifteenMinutes().map((time, i) => (
                            <option key={i} value={time}>
                               {time}
@@ -125,7 +130,7 @@ export default function EventModal() {
                         placeholder="Add a description"
                         value={description}
                         required
-                        className="pt-3 border-0 text-gray-600 pb-2 w-full border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-blue-500"
+                        className="pt-3 border-0 text-gray-600 pb-2 w-full border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-yellow-300"
                         onChange={(e) => setDescription(e.target.value)}
                      />
                   </div>
@@ -142,7 +147,7 @@ export default function EventModal() {
                               className={`bg-${lblClass}-500 w-6 h-6 rounded-full flex items-center justify-center cursor-pointer`}
                            >
                               {selectedLabel === lblClass && (
-                                 <span className="material-icons-outlined text-white text-sm">
+                                 <span className=" text-white text-sm">
                                     <CheckIcon />
                                  </span>
                               )}
@@ -156,9 +161,9 @@ export default function EventModal() {
                <button
                   type="submit"
                   onClick={handleSubmit}
-                  className="bg-blue-500 hover:bg-blue-600 px-6 py-2 rounded text-white"
+                  className="bg-yellow-200 hover:bg-yellow-300 px-6 py-2 rounded text-black font-bold transition-color"
                >
-                  Save
+                  {selectedEvent ? "Update" : "Create"}
                </button>
             </footer>
          </form>

@@ -16,7 +16,7 @@ export default function Day({ day, rowIdx }) {
 
    function getCurrentDayClass() {
       return day.format("DD-MM-YY") === dayjs().format("DD-MM-YY")
-         ? "bg-blue-600 text-white rounded-full w-7"
+         ? "bg-yellow-200 text-black w-8 text-center font-bold rounded-full"
          : "";
    }
 
@@ -49,9 +49,10 @@ export default function Day({ day, rowIdx }) {
                <div
                   key={idx}
                   onClick={() => setSelectedEvent(evt)}
-                  className={`bg-${evt.label}-200 p-1 mr-3 ml-3 text-gray-600 text-sm rounded mb-1 truncate`}
+                  className={`flex justify-between bg-${evt.label}-200 p-1 px-2 mr-3 ml-3 text-gray-600 text-sm rounded mb-1 truncate`}
                >
-                  {evt.title}
+                  <span className="font-semibold">{evt.title}</span>
+                  <span>{evt.times}</span>
                </div>
             ))}
          </div>

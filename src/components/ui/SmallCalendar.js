@@ -32,17 +32,17 @@ export default function SmallCalendar() {
       const currDay = day.format(format);
       const slcDay = daySelected && daySelected.format(format);
       if (nowDay === currDay) {
-         return "bg-blue-500 rounded-full text-white";
+         return "bg-yellow-200 rounded-full text-black font-bold";
       } else if (currDay === slcDay) {
-         return "bg-blue-100 rounded-full text-blue-600 font-bold";
+         return "bg-yellow-100 rounded-full text-yellow-500 font-bold";
       } else {
          return "";
       }
    }
    return (
       <div className="mt-9">
-         <header className="flex justify-between">
-            <p className="text-gray-500 font-bold">
+         <header className="flex justify-between mb-3 ml-2">
+            <p className="text-black font-semibold">
                {dayjs(new Date(dayjs().year(), currentMonthIdx)).format("MMMM YYYY")}
             </p>
             <div>
@@ -60,7 +60,7 @@ export default function SmallCalendar() {
          </header>
          <div className="grid grid-cols-7 grid-rows-6">
             {currentMonth[0].map((day, i) => (
-               <span key={i} className="text-sm py-1 text-center">
+               <span key={i} className="text-sm py-1 text-center font-semibold">
                   {day.format("dd").charAt(0)}
                </span>
             ))}

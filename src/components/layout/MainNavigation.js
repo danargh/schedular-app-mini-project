@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 import React, { useContext } from "react";
-import logo from "../../assets/logo.png";
+import logoApp from "../../assets/logoApp.png";
 import GlobalContext from "../../context/GlobalContext";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -31,14 +31,13 @@ const MainNavigation = () => {
    }
 
    return (
-      <header className="flex items-center justify-between">
+      <header className="flex items-center justify-between bg-gray-100">
          <nav className="px-4 py-2 flex items-center">
             <button className="mx-2 cursor-pointer" onClick={handleSidebar}>
                <MenuIcon />
             </button>
-            {/* <Image src={logo} alt="calendar" className="mr-2 w-12 h-12" /> */}
-            <h1 className="mr-10 text-xl text-gray-500 fond-bold">SchedularApp</h1>
-            <button onClick={handleReset} className="border rounded py-2 px-4 mr-5">
+            <Image src={logoApp} alt="calendar" className="mr-8 w-10 h-10 ml-3" />
+            <button onClick={handleReset} className="border rounded py-2 px-4 mr-5 border-black">
                Today
             </button>
             <button onClick={handlePrevMonth}>
@@ -58,11 +57,10 @@ const MainNavigation = () => {
 
          <div>
             <a href="#">
-               <DarkModeIcon fontSize="large" />
+               <span className="mx-2">
+                  <DarkModeIcon fontSize="large" />
+               </span>
             </a>
-
-            <button className="border rounded py-2 px-4 mr-5">Month</button>
-
             {/* <LightModeIcon fontSize="large" /> */}
 
             <ProfileButton />
