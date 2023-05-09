@@ -3,7 +3,6 @@ import GlobalContext from "../../context/GlobalContext";
 import { signOutAccount } from "../../lib/firebase";
 import { useRouter } from "next/router";
 
-import PersonIcon from "@mui/icons-material/Person";
 import CloseIcon from "@mui/icons-material/Close";
 
 export default function ProfileModal() {

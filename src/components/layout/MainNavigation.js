@@ -89,7 +89,7 @@ const MainNavigation = () => {
                      setTheme("dark");
                   }}
                >
-                  <LightModeIcon fontSize="large" />
+                  <LightModeIcon fontSize="large" className="transition-all" />
                </button>
             ) : (
                <button
@@ -98,7 +98,7 @@ const MainNavigation = () => {
                      setTheme("light");
                   }}
                >
-                  <DarkModeIcon fontSize="large" />
+                  <DarkModeIcon fontSize="large" className="transition-all" />
                </button>
             )}
 

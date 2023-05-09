@@ -49,7 +49,7 @@ export default function Day({ day, rowIdx }) {
                <div
                   key={idx}
                   onClick={() => setSelectedEvent(evt)}
-                  className={`flex justify-between bg-${evt.label}-200 p-1 px-2 mr-3 ml-3 text-gray-600 text-sm rounded mb-1 truncate`}
+                  className={`flex justify-between bg-${evt.label}-200 p-1 px-2 mr-3 ml-3 text-gray-600 text-sm rounded mb-1 truncate hover:shadow-md transition-all dark:text-slate-800`}
                >
                   <span className="font-semibold">{evt.title}</span>
                   <span>{evt.times}</span>

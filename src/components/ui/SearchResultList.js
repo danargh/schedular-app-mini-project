@@ -2,7 +2,7 @@ import GlobalContext from "@/context/GlobalContext";
 import { useContext } from "react";
 
 export default function SearchResultList(props) {
-   const { savedEvents, monthIndex, setMonthIndex } = useContext(GlobalContext);
+   const { savedEvents, setMonthIndex } = useContext(GlobalContext);
 
    // search feature
    const results = savedEvents.filter((event) => {
@@ -17,9 +17,9 @@ export default function SearchResultList(props) {
 
    return (
       <>
-         <div className="absolute mt-3 ml-3 bg-white w-80 rounded-lg shadow-md">
+         <div className="absolute mt-3 ml-3 bg-white w-80 rounded-lg shadow-md dark:bg-slate-600">
             <ul className="px-3 py-3 flex flex-col gap-2">
-               <p className="text-gray-400 mb-2">Search Results</p>
+               <p className="text-gray-400 mb-2 dark:text-slate-200">Search Results</p>
                {results.map((event, idx) => (
                   <li
                      key={idx}

@@ -43,7 +43,7 @@ function Home() {
    }
 
    if (!user) {
-      router.push("/");
+      router.push("/login");
    }
 
    return (

@@ -10,7 +10,6 @@ import React from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import logoAppText from "../../assets/logoAppText.png";
 import Image from "next/image";
-import bgLightMode from "../../assets/bgLightMode.png";
 
 export default function Login() {
    const router = useRouter();

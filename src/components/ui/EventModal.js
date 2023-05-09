@@ -56,7 +56,7 @@ export default function EventModal() {
 
    return (
       <div className="h-screen w-full fixed left-0 top-0 flex justify-center items-center">
-         <form className="bg-white rounded-lg shadow-2xl w-1/4 dark:bg-slate-600">
+         <form className="bg-white rounded-lg shadow-2xl w-1/4 dark:bg-slate-600 dark:text-slate-200">
             <header className="bg-green-300 px-4 py-2 flex justify-between items-center rounded-tl-lg rounded-tr-lg">
                <span className=" text-gray-400">
                   <DragHandleIcon sx={{ color: "black" }} />
@@ -91,7 +91,7 @@ export default function EventModal() {
                      placeholder="Add title"
                      value={title}
                      required
-                     className="pt-3 border-0 text-gray-600 text-xl font-semibold pb-2 w-full border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-yellow-300 dark:bg-slate-600 dark:border-b-green-300 dark:placeholder:text-slate-300"
+                     className="pt-3 border-0 text-gray-600 text-xl font-semibold pb-2 w-full border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-yellow-300 dark:bg-slate-600 dark:border-b-green-300 dark:text-slate-200 dark:placeholder:text-slate-300"
                      onChange={(e) => setTitle(e.target.value)}
                   />
 
@@ -130,7 +130,7 @@ export default function EventModal() {
                         placeholder="Add a description"
                         value={description}
                         required
-                        className="pt-3 border-0 text-gray-600 pb-2 w-full border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-yellow-300 dark:border-b-green-300 dark:bg-slate-600 dark:placeholder:text-slate-200"
+                        className="pt-3 border-0 text-gray-600 pb-2 w-full border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-yellow-300 dark:border-b-green-300 dark:bg-slate-600 dark:placeholder:text-slate-200 dark:text-slate-200"
                         onChange={(e) => setDescription(e.target.value)}
                      />
                   </div>

@@ -8,7 +8,7 @@ export default function CreateEventButton() {
    return (
       <button
          onClick={() => setShowEventModal(true)}
-         className={`p-2 rounded-full flex items-center bg-black dark:bg-green-300 dark:hover:bg-green-400 dark:border-green-300 ${
+         className={`p-2 rounded-full flex items-center bg-black dark:bg-green-300 dark:hover:bg-green-400 dark:border-green-300 hover:shadow-lg transition-all ${
             showSidebar === false ? "absolute top-20 left-5" : null
          }`}
       >
