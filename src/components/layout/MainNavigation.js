@@ -1,6 +1,5 @@
 import dayjs from "dayjs";
 import React, { useContext } from "react";
-import logoApp from "../../assets/logoApp.png";
 import darkLogoApp from "../../assets/darkLogoApp.png";
 import GlobalContext from "../../context/GlobalContext";
 import Image from "next/image";
@@ -21,8 +20,7 @@ const MainNavigation = () => {
    const { monthIndex, setMonthIndex, showSidebar, setShowSidebar, savedEvents } =
       useContext(GlobalContext);
    const [searchKeyword, setSearchKeyword] = useState("");
-   const { systemTheme, theme, setTheme } = useTheme("light");
-   // const currentTheme = theme === "system" ? systemTheme : theme;
+   const { theme, setTheme } = useTheme("light");
 
    function handleSidebar() {
       setShowSidebar(!showSidebar);

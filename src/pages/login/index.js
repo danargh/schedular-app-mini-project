@@ -1,34 +1,29 @@
-import { useAuthState } from "react-firebase-hooks/auth";
+import { firebaseAuth } from "../../lib/firebase";
 import { useRouter } from "next/router";
-import { signUp } from "../../lib/firebase";
 import { useState } from "react";
-import { createUserDocument, firebaseAuth, getSignUpErrorMessage } from "../../lib/firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
 import Spinner from "../../components/ui/Spinner";
+import { getSignInErrorMessage, signIn } from "../../lib/firebase";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-
-import CloseIcon from "@mui/icons-material/Close";
-
 import React from "react";
+import CloseIcon from "@mui/icons-material/Close";
+import logoAppText from "../../assets/logoAppText.png";
+import Image from "next/image";
+import bgLightMode from "../../assets/bgLightMode.png";
 
-export default function Register() {
+export default function Login() {
+   const router = useRouter();
    const [user, loading] = useAuthState(firebaseAuth);
    const [errorMessage, setErrorMesssage] = useState(null);
    const [showErrorMessage, setShowErrorMessage] = useState(false);
    const [isLoading, setIsLoading] = useState(false);
-   const router = useRouter();
-
    const formik = useFormik({
       initialValues: {
-         username: "",
          email: "",
          password: "",
       },
       validationSchema: Yup.object({
-         username: Yup.string()
-            .min(3, "Must be 3 characters or more")
-            .max(25, "Must be 25 characters or less")
-            .required("Required"),
          email: Yup.string().email("Invalid email address").required("Required"),
          password: Yup.string()
             .min(6, "Must be 6 characters or more")
@@ -39,13 +34,14 @@ export default function Register() {
          (async () => {
             try {
                setIsLoading(true);
-               const res = await signUp(values.email, values.password);
-               await createUserDocument(res.user, values.username);
+               await signIn(values.email, values.password);
                router.push("/home");
                setIsLoading(false);
             } catch (error) {
-               const errorMessage = getSignUpErrorMessage(error.code);
+               const errorMessage = getSignInErrorMessage(error.code);
                setErrorMesssage(errorMessage);
+               setShowErrorMessage(true);
+               setIsLoading(false);
             }
          })();
       },
@@ -62,9 +58,10 @@ export default function Register() {
    return (
       <>
          <div className="flex w-full h-screen dark:bg-white">
-            <div className="w-full flex items-center justify-center">
-               <div className=" w-11/12 max-w-[600px] px-10 py-8 rounded-3xl bg-white border-2 border-gray-100 dark:text-slate-800">
-                  <h1 className="text-5xl font-semibold text-black text-center">Sign Up</h1>
+            <div className="w-full flex-col flex items-center justify-center">
+               <Image src={logoAppText} alt="calendar" className="mx-8 w-24 mb-8" />
+               <div className=" w-11/12 max-w-[600px] px-10 py-6 rounded-xl bg-white border-2 border-gray-100 dark:text-slate-800">
+                  <h1 className="text-5xl font-semibold text-center">Sign In</h1>
                   {errorMessage && showErrorMessage && (
                      <div className="px-3 flex justify-between bg-red-400 text-center p-1 rounded-lg font-semibold text-white mt-5 relative transition-all">
                         {errorMessage}
@@ -73,32 +70,9 @@ export default function Register() {
                         </button>
                      </div>
                   )}
-                  <form className="mt-8" onSubmit={formik.handleSubmit}>
-                     <div className="flex flex-col">
-                        <div className="flex items-center justify-between">
-                           <label className="text-lg font-medium" htmlFor="username">
-                              Username*
-                           </label>
-                           {formik.touched.username && formik.errors.username ? (
-                              <div className="text-red-500">{formik.errors.username}</div>
-                           ) : null}
-                        </div>
-                        <input
-                           id="username"
-                           name="username"
-                           type="text"
-                           onChange={formik.handleChange}
-                           onBlur={formik.handleBlur}
-                           value={formik.values.username}
-                           className={`w-full border-2 rounded-xl border-gray-100 p-3 mt-1 text-gray-500 ${
-                              formik.touched.username && formik.errors.username
-                                 ? "bg-red-100 border-red-500"
-                                 : ""
-                           }}`}
-                           placeholder="Enter your username"
-                        />
-                     </div>
-                     <div className="flex flex-col mt-4">
+
+                  <form className="mt-3" onSubmit={formik.handleSubmit}>
+                     <div className="flex flex-col mt-1">
                         <div className="flex items-center justify-between">
                            <label className="text-lg font-medium" htmlFor="email">
                               Email*
@@ -114,7 +88,7 @@ export default function Register() {
                            onChange={formik.handleChange}
                            onBlur={formik.handleBlur}
                            value={formik.values.email}
-                           className={`w-full border-2 border-gray-100 rounded-xl p-3 mt-1 text-gray-500 ${
+                           className={`w-full border-2 border-gray-200 rounded-xl p-3 mt-1 text-gray-500 ${
                               formik.touched.email && formik.errors.email
                                  ? "bg-red-100 border-red-500"
                                  : null
@@ -139,7 +113,7 @@ export default function Register() {
                            onChange={formik.handleChange}
                            onBlur={formik.handleBlur}
                            value={formik.values.password}
-                           className={`w-full border-2 border-gray-100 rounded-xl p-3 mt-1 text-gray-500 ${
+                           className={`w-full border-2 border-gray-200 rounded-xl p-3 mt-1 text-gray-500 ${
                               formik.touched.password && formik.errors.password
                                  ? "bg-red-100 border-red-500"
                                  : null
@@ -174,18 +148,18 @@ export default function Register() {
                                  </svg>
                               </span>
                            ) : (
-                              "Sign Up"
+                              "Sign In"
                            )}
                         </button>
                      </div>
                   </form>
-                  <div className="mt-4 flex justify-center items-center">
-                     <p className="font-medium text-base text-black">Have an account?</p>
+                  <div className="mt-8 flex justify-center items-center">
+                     <p className="font-medium text-base">Don&apos;t have an account?</p>
                      <button
-                        onClick={() => router.push("/login")}
+                        onClick={() => router.push("/register")}
                         className="ml-2 font-medium text-base text-green-300"
                      >
-                        Sign in
+                        Sign up
                      </button>
                   </div>
                </div>

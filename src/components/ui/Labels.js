@@ -7,7 +7,7 @@ export default function Labels() {
       <React.Fragment>
          <p className="text-gray-500 font-bold mt-10 dark:text-green-300">Label</p>
          {labels.map(({ label: lbl, checked }, idx) => (
-            <label key={idx} className="flex items-center mt-3 block">
+            <label key={idx} className="flex items-center mt-3">
                <input
                   type="checkbox"
                   checked={checked}

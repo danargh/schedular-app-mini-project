@@ -12,7 +12,7 @@ export default function ProfileModal() {
 
    const handleLogout = () => {
       signOutAccount();
-      router.push("/");
+      router.push("/login");
    };
 
    return (

@@ -161,7 +161,7 @@ export default function EventModal() {
                <button
                   type="submit"
                   onClick={handleSubmit}
-                  className="bg-yellow-200 hover:bg-yellow-300 px-6 py-2 rounded text-black font-bold transition-color dark:bg-green-300"
+                  className="bg-green-300 hover:bg-green-400 px-6 py-2 rounded text-black font-bold transition-color dark:bg-green-300"
                >
                   {selectedEvent ? "Update" : "Create"}
                </button>
