@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import GlobalContext from "../../context/GlobalContext";
-import { signOutAccount } from "../../lib/firebase";
+import GlobalContext from "@/context/GlobalContext";
+import { signOutAccount } from "@/lib/firebase";
 import { useRouter } from "next/router";
 
 import CloseIcon from "@mui/icons-material/Close";
@@ -41,10 +41,7 @@ export default function ProfileModal() {
                   </div>
                </div>
                <footer className="flex justify-end border-t p-3 mt-5 dark:border-t-green-300">
-                  <button
-                     className=" bg-red-500 hover:bg-red-600 px-6 py-2 rounded text-white mx-3"
-                     onClick={handleLogout}
-                  >
+                  <button className=" bg-red-500 hover:bg-red-600 px-6 py-2 rounded text-white mx-3" onClick={handleLogout}>
                      Logout
                   </button>
                </footer>

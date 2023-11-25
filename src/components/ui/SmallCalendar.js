@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
 import React, { useContext, useEffect, useState } from "react";
-import GlobalContext from "../../context/GlobalContext";
-import { getMonth } from "../../utils/calendar-month";
+import GlobalContext from "@/context/GlobalContext";
+import { getMonth } from "@/utils/calendar-month";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
@@ -13,8 +13,7 @@ export default function SmallCalendar() {
       setCurrentMonth(getMonth(currentMonthIdx));
    }, [currentMonthIdx]);
 
-   const { monthIndex, setSmallCalendarMonth, setDaySelected, daySelected } =
-      useContext(GlobalContext);
+   const { monthIndex, setSmallCalendarMonth, setDaySelected, daySelected } = useContext(GlobalContext);
 
    useEffect(() => {
       setCurrentMonthIdx(monthIndex);
@@ -42,9 +41,7 @@ export default function SmallCalendar() {
    return (
       <div className="mt-9">
          <header className="flex justify-between mb-3 ml-2">
-            <p className="text-black font-semibold dark:text-green-300">
-               {dayjs(new Date(dayjs().year(), currentMonthIdx)).format("MMMM YYYY")}
-            </p>
+            <p className="text-black font-semibold dark:text-green-300">{dayjs(new Date(dayjs().year(), currentMonthIdx)).format("MMMM YYYY")}</p>
             <div>
                <button onClick={handlePrevMonth}>
                   <span className="material-icons-outlined cursor-pointer text-gray-600 mx-2 dark:text-green-300">

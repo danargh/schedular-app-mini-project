@@ -1,12 +1,7 @@
 import { useState, useEffect, useReducer, useMemo } from "react";
 import GlobalContext from "./GlobalContext";
 import dayjs from "dayjs";
-import {
-   getEventDocument,
-   createEventDocument,
-   deleteEventDocument,
-   updateEventDocument,
-} from "../lib/firebase";
+import { getEventDocument, createEventDocument, deleteEventDocument, updateEventDocument } from "@/lib/firebase";
 
 function savedEventsReducer(state, { type, payload }) {
    switch (type) {
@@ -17,6 +12,7 @@ function savedEventsReducer(state, { type, payload }) {
          return [...state, payload];
       case "update":
          updateEventDocument(payload);
+         console.log("payload update", payload);
          return state.map((evt) => (evt.id === payload.id ? payload : evt));
       case "delete":
          deleteEventDocument(payload.uid);

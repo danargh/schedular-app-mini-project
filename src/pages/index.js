@@ -1,6 +1,6 @@
-import darkLogoApp from "../assets/darkLogoApp.png";
+import darkLogoApp from "@/assets/darkLogoApp.png";
 import Image from "next/image";
-import bgLightMode from "../assets/bgLightMode.png";
+import bgLightMode from "@/assets/bgLightMode.png";
 import { useRouter } from "next/router";
 
 import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
@@ -26,10 +26,7 @@ export default function LandingPage() {
                   <ul className="cursor-pointer hover:text-green-300">About</ul>
                </div>
                <div>
-                  <button
-                     onClick={handleLogin}
-                     className="bg-green-300 px-6 py-2 rounded-lg hover:bg-green-400"
-                  >
+                  <button onClick={handleLogin} className="bg-green-300 px-6 py-2 rounded-lg hover:bg-green-400">
                      Login
                   </button>
                </div>
@@ -38,13 +35,9 @@ export default function LandingPage() {
                <div>
                   <p className="text-xl font-semibold text-slate-500">SchedularApp</p>
                   <h1 className=" text-5xl w-3/4 my-5 font-bold leading-snug">
-                     <span className="text-green-300 text-6xl">Take control</span> your schedule &
-                     <span className="text-green-300 text-6xl"> boost</span> your productivity
+                     <span className="text-green-300 text-6xl">Take control</span> your schedule &<span className="text-green-300 text-6xl"> boost</span> your productivity
                   </h1>
-                  <button
-                     onClick={handleLogin}
-                     className="flex hover:bg-green-400 items-center justify-center bg-green-300 px-8 py-4 rounded-lg font-bold mt-8"
-                  >
+                  <button onClick={handleLogin} className="flex hover:bg-green-400 items-center justify-center bg-green-300 px-8 py-4 rounded-lg font-bold mt-8">
                      <span>Get Started</span>
                      <span className="pl-3">
                         <ArrowOutwardIcon />

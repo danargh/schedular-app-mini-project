@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
-import GlobalContext from "../../context/GlobalContext";
-import { getTimesEveryFifteenMinutes } from "../../utils/times";
+import GlobalContext from "@/context/GlobalContext";
+import { getTimesEveryFifteenMinutes } from "@/utils/times";
 
 // icons
 import DragHandleIcon from "@mui/icons-material/DragHandle";
@@ -17,17 +17,12 @@ import { Timestamp } from "firebase/firestore";
 const labelsClasses = ["indigo", "gray", "green", "blue", "red", "purple"];
 
 export default function EventModal() {
-   const { setShowEventModal, daySelected, dispatchCalEvent, selectedEvent, authenticatedUser } =
-      useContext(GlobalContext);
+   const { setShowEventModal, daySelected, dispatchCalEvent, selectedEvent, authenticatedUser } = useContext(GlobalContext);
 
    const [title, setTitle] = useState(selectedEvent ? selectedEvent.title : "");
    const [times, setTimes] = useState(selectedEvent ? selectedEvent.times : "");
    const [description, setDescription] = useState(selectedEvent ? selectedEvent.description : "");
-   const [selectedLabel, setSelectedLabel] = useState(
-      selectedEvent ? labelsClasses.find((lbl) => lbl === selectedEvent.label) : labelsClasses[0]
-   );
-
-   console.log(selectedEvent);
+   const [selectedLabel, setSelectedLabel] = useState(selectedEvent ? labelsClasses.find((lbl) => lbl === selectedEvent.label) : labelsClasses[0]);
 
    function handleSubmit(e) {
       e.preventDefault();
@@ -106,12 +101,7 @@ export default function EventModal() {
                      <span className=" text-gray-400 mr-3 dark:text-green-300">
                         <AccessTimeIcon />
                      </span>
-                     <select
-                        className="rounded-lg border-2 border-gray-300 dark:border-green-300 dark:bg-slate-600"
-                        name="times"
-                        value={times}
-                        onChange={(e) => setTimes(e.target.value)}
-                     >
+                     <select className="rounded-lg border-2 border-gray-300 dark:border-green-300 dark:bg-slate-600" name="times" value={times} onChange={(e) => setTimes(e.target.value)}>
                         {getTimesEveryFifteenMinutes().map((time, i) => (
                            <option key={i} value={time} className="dark:text-slate-200 font-medium">
                               {time}
@@ -141,11 +131,7 @@ export default function EventModal() {
                      </span>
                      <div className="flex gap-x-2">
                         {labelsClasses.map((lblClass, i) => (
-                           <span
-                              key={i}
-                              onClick={() => setSelectedLabel(lblClass)}
-                              className={`bg-${lblClass}-500 w-6 h-6 rounded-full flex items-center justify-center cursor-pointer`}
-                           >
+                           <span key={i} onClick={() => setSelectedLabel(lblClass)} className={`bg-${lblClass}-500 w-6 h-6 rounded-full flex items-center justify-center cursor-pointer`}>
                               {selectedLabel === lblClass && (
                                  <span className=" text-white text-sm">
                                     <CheckIcon />
@@ -158,11 +144,7 @@ export default function EventModal() {
                </div>
             </div>
             <footer className="flex justify-end border-t p-3 mt-5 dark:border-t-green-300">
-               <button
-                  type="submit"
-                  onClick={handleSubmit}
-                  className="bg-green-300 hover:bg-green-400 px-6 py-2 rounded text-black font-bold transition-color dark:bg-green-300"
-               >
+               <button type="submit" onClick={handleSubmit} className="bg-green-300 hover:bg-green-400 px-6 py-2 rounded text-black font-bold transition-color dark:bg-green-300">
                   {selectedEvent ? "Update" : "Create"}
                </button>
             </footer>

@@ -1,24 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp, getApps } from "firebase/app";
-import {
-   getFirestore,
-   setDoc,
-   addDoc,
-   doc,
-   getDoc,
-   collection,
-   where,
-   getDocs,
-   query,
-   deleteDoc,
-   updateDoc,
-} from "firebase/firestore";
-import {
-   getAuth,
-   signInWithEmailAndPassword,
-   createUserWithEmailAndPassword,
-   signOut,
-} from "firebase/auth";
+import { getFirestore, setDoc, addDoc, doc, getDoc, collection, where, getDocs, query, deleteDoc, updateDoc } from "firebase/firestore";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from "firebase/auth";
 
 const firebaseConfig = {
    apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -127,9 +110,7 @@ export const getEventDocument = async (userId) => {
 
 export const createEventDocument = async (event) => {
    if (!event) return;
-   console.log(event);
    try {
-      console.log("ini push");
       await addDoc(collection(db, "events"), {
          id: event.id,
          title: event.title,
@@ -164,7 +145,6 @@ export const updateEventDocument = async (event) => {
 };
 
 export const deleteEventDocument = async (eventUid) => {
-   console.log("ini delete");
    if (!eventUid) return;
    try {
       await deleteDoc(doc(db, "events", eventUid));

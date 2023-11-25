@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import PersonIcon from "@mui/icons-material/Person";
-import GlobalContext from "../../context/GlobalContext";
+import GlobalContext from "@/context/GlobalContext";
 
 export default function ProfileButton() {
    const { showProfileModal, setShowProfileModal } = useContext(GlobalContext);
