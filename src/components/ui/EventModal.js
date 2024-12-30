@@ -25,6 +25,7 @@ export default function EventModal() {
    const [selectedLabel, setSelectedLabel] = useState(selectedEvent ? labelsClasses.find((lbl) => lbl === selectedEvent.label) : labelsClasses[0]);
 
    function handleSubmit(e) {
+      console.log(daySelected, times);
       e.preventDefault();
       const [day, month, year] = dayjs(daySelected).format("DD-MMMM-YY").split("-");
       const [hour, minute] = times.split(":");

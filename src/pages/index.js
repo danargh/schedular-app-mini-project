@@ -15,11 +15,11 @@ export default function LandingPage() {
    return (
       <>
          <header className="bg-white h-screen w-full text-slate-800">
-            <nav className="flex items-center justify-between px-5 py-3 font-semibold">
+            <nav className="flex items-center max-w-5xl mx-auto justify-between px-5 py-3 font-semibold ">
                <div>
                   <Image src={darkLogoApp} alt="calendar" className="mr-8 w-10 ml-3" />
                </div>
-               <div className="flex itemx-center justify-center gap-8">
+               <div className="hidden md:flex itemx-center justify-center gap-8">
                   <ul className="cursor-pointer hover:text-green-300">Home</ul>
                   <ul className="cursor-pointer hover:text-green-300">Products</ul>
                   <ul className="cursor-pointer hover:text-green-300">Contact</ul>
@@ -31,11 +31,14 @@ export default function LandingPage() {
                   </button>
                </div>
             </nav>
-            <section className="flex items-center justify-between mt-0 mx-24 mr-0">
-               <div>
+            <section className="flex items-center max-w-5xl mx-auto px-5 justify-between mt-20">
+               <div className="hidden lg:flex justify-end items-center absolute right-0 top-28 max-w-xl">
+                  <Image src={bgLightMode} alt="calendar" />
+               </div>
+               <div className="flex flex-col justify-between items-start w-full lg:max-w-2xl">
                   <p className="text-xl font-semibold text-slate-500">SchedularApp</p>
                   <h1 className=" text-5xl w-3/4 my-5 font-bold leading-snug">
-                     <span className="text-green-300 text-6xl">Take control</span> your schedule &<span className="text-green-300 text-6xl"> boost</span> your productivity
+                     <span className="text-slate-800 text-5xl lg:text-6xl">Take control your schedule & boost your productivity </span>
                   </h1>
                   <button onClick={handleLogin} className="flex hover:bg-green-400 items-center justify-center bg-green-300 px-8 py-4 rounded-lg font-bold mt-8">
                      <span>Get Started</span>
@@ -43,9 +46,6 @@ export default function LandingPage() {
                         <ArrowOutwardIcon />
                      </span>
                   </button>
-               </div>
-               <div className="flex justify-end items-center ml-auto">
-                  <Image src={bgLightMode} alt="calendar" className="h-5/6 w-max" />
                </div>
             </section>
          </header>

@@ -107,7 +107,10 @@ export default function Login() {
                      </div>
 
                      <div className="mt-8 flex flex-col gap-y-4">
-                        <button type="submit" className="active:scale-[.98] active:duration-75 transition-all hover:bg-green-400  ease-in-out transform py-3 bg-green-300 rounded-xl text-black font-bold text-lg">
+                        <button
+                           type="submit"
+                           className="active:scale-[.98] active:duration-75 transition-all hover:bg-green-400  ease-in-out transform py-3 bg-green-300 rounded-xl text-black font-bold text-lg"
+                        >
                            {isLoading ? (
                               <span>
                                  <svg aria-hidden="true" role="status" class="inline w-8 h-8 mr-3 text-green-500 animate-spin" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
